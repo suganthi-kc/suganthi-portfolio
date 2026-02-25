@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suganthi - Computer Science Educator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(-45deg, #ff9a9e, #fecfef, #fecfef, #a8edea, #fed6e3);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            min-height: 100vh;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Navigation Bar */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 1rem 0;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav li {
+            margin: 0 1rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #4a90e2;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.4s ease;
+            position: relative;
+            padding: 0.5rem 1.2rem;
+            border-radius: 25px;
+            background: linear-gradient(45deg, transparent, rgba(74, 144, 226, 0.1));
+        }
+
+        nav a:hover {
+            color: #fff;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57);
+            background-size: 300% 300%;
+            animation: rainbow 2s ease infinite;
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        @keyframes rainbow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Main Content */
+        main {
+            margin-top: 90px;
+            padding: 2rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            margin-bottom: 4rem;
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        .profile-img {
+            width: 300px;
+            height: 300px;
+            border-radius: 100%;
+            object-fit: cover;
+            margin-bottom: 2rem;
+            box-shadow: 
+                0 25px 50px rgba(0,0,0,0.3),
+                0 0 60px rgba(74, 144, 226, 0.4);
+            border: 8px solid;
+            border-image: linear-gradient(45deg, #ff9a9e, #fecfef, #a8edea, #fed6e3) 1;
+            transition: all 0.5s ease;
+            animation: pulseGlow 3s ease-in-out infinite alternate;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.08) rotate(5deg);
+            box-shadow: 
+                0 35px 70px rgba(0,0,0,0.4),
+                0 0 80px rgba(255, 107, 107, 0.6);
+            border-image: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1) 1;
+        }
+
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 25px 50px rgba(0,0,0,0.3), 0 0 60px rgba(74, 144, 226, 0.4); }
+            100% { box-shadow: 0 25px 50px rgba(0,0,0,0.3), 0 0 60px rgba(255, 107, 107, 0.6); }
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            background: linear-gradient(45deg, #2c3e50, #4a90e2, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            font-weight: 800;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .subtitle {
+            font-size: 1.4rem;
+            background: linear-gradient(45deg, #7f8c8d, #95a5a6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 2.5rem;
+            font-weight: 500;
+        }
+
+        /* Bio Cards */
+        .bio-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .bio-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2.5rem;
+            border-radius: 25px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.3);
+            transition: all 0.4s ease;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out forwards;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bio-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.6s;
+        }
+
+        .bio-card:hover::before {
+            left: 100%;
+        }
+
+        .bio-card:nth-child(1) { 
+            border-top: 5px solid #ff6b6b;
+            animation-delay: 0.2s;
+        }
+        .bio-card:nth-child(2) { 
+            border-top: 5px solid #4ecdc4;
+            animation-delay: 0.4s;
+        }
+        .bio-card:nth-child(3) { 
+            border-top: 5px solid #45b7d1;
+            animation-delay: 0.6s;
+        }
+        .bio-card:nth-child(4) { 
+            border-top: 5px solid #feca57;
+            animation-delay: 0.8s;
+        }
+
+        .bio-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.25);
+            background: rgba(255, 255, 255, 1);
+        }
+
+        .bio-card h2 {
+            color: #2c3e50;
+            margin-bottom: 1.2rem;
+            font-size: 1.7rem;
+            font-weight: 700;
+        }
+
+        .bio-card p {
+            font-size: 1.15rem;
+            text-align: justify;
+            color: #555;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+
+            nav li {
+                margin: 0;
+            }
+
+            h1 {
+                font-size: 2.8rem;
+            }
+
+            .profile-img {
+                width: 220px;
+                height: 220px;
+            }
+
+            .bio-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem;
+            color: #fff;
+            background: rgba(0,0,0,0.2);
+            backdrop-filter: blur(10px);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation - UPDATED MENU -->
+    <nav>
+        <ul>
+            <li><a href="#aboutme">About Me</a></li>
+            <li><a href="#igcse">IGCSE</a></li>
+            <li><a href="#ibdp">IBDP</a></li>
+            <li><a href="#gallery">Classroom Gallery</a></li>
+            <li><a href="#digital">Digital Citizenship</a></li>
+            <li><a href="#resources">Resources</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <img src="photo.jpg" alt="Suganthi, Computer Science Educator" class="profile-img">
+            <h1>Hi, I'm Suganthi</h1>
+            <p class="subtitle">Passionate Computer Science Educator at KC High</p>
+        </section>
+
+        <!-- Bio Content -->
+        <section class="bio-container">
+            <div class="bio-card">
+                <h2>✨ Teaching Philosophy</h2>
+                <p>Teaching, for me, is not just a profession but a calling that allows me to share my deep love for technology with young, curious minds. I believe computer science is more than coding—it's a way of thinking, a tool for creativity, and a gateway to solving real-world problems.</p>
+            </div>
+            <div class="bio-card">
+                <h2>🎓 Classroom Experience</h2>
+                <p>My classroom is a space where logic meets imagination, where students feel empowered to experiment, innovate, and learn from their mistakes. I strive to make complex concepts simple, engaging, and meaningful, ensuring every student gains confidence in their abilities.</p>
+            </div>
+            <div class="bio-card">
+                <h2>🚀 Ongoing Passion</h2>
+                <p>My passion for technology drives me to continuously learn, explore emerging trends, and bring fresh ideas into my lessons. Whether introducing programming fundamentals or guiding students through exciting projects, I'm dedicated to nurturing technical skills, resilience, and curiosity.</p>
+            </div>
+            <div class="bio-card">
+                <h2>🌟 Rewarding Journey</h2>
+                <p>Watching my students grow into confident problem-solvers and creative thinkers is the most rewarding part of my journey as an educator.</p>
+            </div>
+        </section>
+    </main>
+
+    
+    <script>
+        // Smooth scrolling for nav links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
